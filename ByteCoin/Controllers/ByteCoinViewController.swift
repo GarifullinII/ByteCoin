@@ -37,7 +37,6 @@ class ByteCoinViewController: UIViewController {
     private let byteCoinImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "bitcoinsign.circle.fill")
-        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         return imageView
@@ -114,7 +113,7 @@ extension ByteCoinViewController {
             ],
             axis: .horizontal,
             spacing: 2,
-            distribution: .fill
+            distribution: .fillProportionally
         )
         coinView.addSubview(coinStackView)
         
@@ -129,8 +128,7 @@ extension ByteCoinViewController {
         NSLayoutConstraint.activate([
             byteCoinStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             byteCoinStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            byteCoinStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            byteCoinStackView.heightAnchor.constraint(equalToConstant: 165)
+            byteCoinStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
         
         NSLayoutConstraint.activate([
@@ -138,9 +136,7 @@ extension ByteCoinViewController {
         ])
         
         NSLayoutConstraint.activate([
-            coinStackView.leadingAnchor.constraint(equalTo: coinView.leadingAnchor),
-            coinStackView.topAnchor.constraint(equalTo: coinView.topAnchor),
-            coinStackView.trailingAnchor.constraint(equalTo: coinView.trailingAnchor),
+            coinStackView.widthAnchor.constraint(equalToConstant: 364),
             coinStackView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
