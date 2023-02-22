@@ -32,6 +32,8 @@ class ByteCoinViewController: UIViewController {
         return view
     }()
     
+    var coinStackView = UIStackView()
+    
     private let byteCoinImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "bitcoinsign.circle.fill")
@@ -63,12 +65,12 @@ class ByteCoinViewController: UIViewController {
         return label
     }()
     
-//    private let currencyPickerView: UIPickerView = {
-//        let picker = UIPickerView()
-//        picker.translatesAutoresizingMaskIntoConstraints = false
-//
-//        return picker
-//    }()
+    //    private let currencyPickerView: UIPickerView = {
+    //        let picker = UIPickerView()
+    //        picker.translatesAutoresizingMaskIntoConstraints = false
+    //
+    //        return picker
+    //    }()
     
     //MARK: - life cycle funcs
     
@@ -102,8 +104,20 @@ extension ByteCoinViewController {
             axis: .vertical,
             spacing: 5,
             distribution: .fillProportionally)
-        
         view.addSubview(byteCoinStackView)
+        
+        coinStackView = UIStackView(
+            arrangedSubviews: [
+                byteCoinImageView,
+                valueLabel,
+                currencyLabel
+            ],
+            axis: .horizontal,
+            spacing: 2,
+            distribution: .fill
+        )
+        coinView.addSubview(coinStackView)
+        
     }
 }
 
@@ -121,6 +135,13 @@ extension ByteCoinViewController {
         
         NSLayoutConstraint.activate([
             coinView.heightAnchor.constraint(equalToConstant: 80)
+        ])
+        
+        NSLayoutConstraint.activate([
+            coinStackView.leadingAnchor.constraint(equalTo: coinView.leadingAnchor),
+            coinStackView.topAnchor.constraint(equalTo: coinView.topAnchor),
+            coinStackView.trailingAnchor.constraint(equalTo: coinView.trailingAnchor),
+            coinStackView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
 }
