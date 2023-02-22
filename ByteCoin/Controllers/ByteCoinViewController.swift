@@ -136,6 +136,10 @@ extension ByteCoinViewController {
         ])
         
         NSLayoutConstraint.activate([
+            valueLabel.widthAnchor.constraint(equalToConstant: 210)
+        ])
+        
+        NSLayoutConstraint.activate([
             coinStackView.widthAnchor.constraint(equalToConstant: 364),
             coinStackView.heightAnchor.constraint(equalToConstant: 80)
         ])
