@@ -64,12 +64,13 @@ class ByteCoinViewController: UIViewController {
         return label
     }()
     
-    //    private let currencyPickerView: UIPickerView = {
-    //        let picker = UIPickerView()
-    //        picker.translatesAutoresizingMaskIntoConstraints = false
-    //
-    //        return picker
-    //    }()
+        private let currencyPickerView: UIPickerView = {
+            let picker = UIPickerView()
+            picker.backgroundColor = .systemGray
+            picker.translatesAutoresizingMaskIntoConstraints = false
+    
+            return picker
+        }()
     
     //MARK: - life cycle funcs
     
@@ -117,6 +118,7 @@ extension ByteCoinViewController {
         )
         coinView.addSubview(coinStackView)
         
+        view.addSubview(currencyPickerView)
     }
 }
 
@@ -140,8 +142,17 @@ extension ByteCoinViewController {
         ])
         
         NSLayoutConstraint.activate([
+            coinStackView.centerYAnchor.constraint(equalTo: coinView.centerYAnchor),
+            coinStackView.centerXAnchor.constraint(equalTo: coinView.centerXAnchor),
             coinStackView.widthAnchor.constraint(equalToConstant: 364),
             coinStackView.heightAnchor.constraint(equalToConstant: 80)
+        ])
+        
+        NSLayoutConstraint.activate([
+            currencyPickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            currencyPickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            currencyPickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 10),
+            currencyPickerView.heightAnchor.constraint(equalToConstant: 216)
         ])
     }
 }
