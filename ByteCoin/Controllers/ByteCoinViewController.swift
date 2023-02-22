@@ -11,6 +11,8 @@ class ByteCoinViewController: UIViewController {
     
     //MARK: - let/var
     
+    let coinManager = CoinManager()
+    
     var byteCoinStackView = UIStackView()
     
     private let byteCoinLabel: UILabel = {
@@ -66,7 +68,7 @@ class ByteCoinViewController: UIViewController {
     
     private var currencyPickerView: UIPickerView = {
         let picker = UIPickerView()
-        picker.backgroundColor = .systemGray
+        picker.backgroundColor = .clear
         picker.translatesAutoresizingMaskIntoConstraints = false
         
         return picker
@@ -81,6 +83,9 @@ class ByteCoinViewController: UIViewController {
         setConstraints()
         
         view.backgroundColor = .systemBlue
+        
+        currencyPickerView.dataSource = self
+        currencyPickerView.delegate = self
     }
     
     //MARK: - flow funcs
@@ -88,6 +93,33 @@ class ByteCoinViewController: UIViewController {
     
     //MARK: - public
     
+    
+}
+
+//MARK: - extensions UIPickerViewDataSource
+
+extension ByteCoinViewController: UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return coinManager.currencyArray.count
+    }
+}
+
+//MARK: - extensions UIPickerViewDelegate
+
+extension ByteCoinViewController: UIPickerViewDelegate {
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return coinManager.currencyArray[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print(coinManager.currencyArray[row])
+    }
     
 }
 
@@ -149,8 +181,8 @@ extension ByteCoinViewController {
         ])
         
         NSLayoutConstraint.activate([
-            currencyPickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            currencyPickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            currencyPickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            currencyPickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             currencyPickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
     }
