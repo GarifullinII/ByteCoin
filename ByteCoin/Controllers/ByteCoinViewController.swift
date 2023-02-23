@@ -118,7 +118,7 @@ extension ByteCoinViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(coinManager.currencyArray[row])
+        return coinManager.getCoinPrice(for: coinManager.currencyArray[row])
     }
     
 }
