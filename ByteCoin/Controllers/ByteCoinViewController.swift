@@ -118,10 +118,9 @@ extension ByteCoinViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        print(coinManager.performRequest(urlString: "\("https://rest.coinapi.io/v1/exchangerate/BTC")/\("EUR")?apikey=\("???")"))
+        
         return coinManager.getCoinPrice(for: coinManager.currencyArray[row])
     }
-    
 }
 
 //MARK: - extensions setupViews

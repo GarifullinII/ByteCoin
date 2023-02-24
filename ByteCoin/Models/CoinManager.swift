@@ -10,13 +10,12 @@ import Foundation
 struct CoinManager {
     
     let baseURL = "https://rest.coinapi.io/v1/exchangerate/BTC"
-    let apiKey = "???"
+    let apiKey = "..."
     
     let currencyArray = ["AUD", "BRL", "CAD", "CNY", "EUR", "GBP", "HKD", "IDR", "ILS", "INR", "JPY", "MXN", "NOK", "NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
     
     func getCoinPrice(for currency: String) {
         let urlString = "\(baseURL)/\(currency)?apikey=\(apiKey)"
-//        let urlString = "\("https://rest.coinapi.io/v1/exchangerate/BTC")/\("EUR")?apikey=\("???")"
         
         performRequest(urlString: urlString)
     }
@@ -36,14 +35,26 @@ struct CoinManager {
                 }
                 
                 if let safeData = data {
-                    let dataString = String(data: safeData, encoding: .utf8)
-                    print(dataString!)
+                    //                    let dataString = String(data: safeData, encoding: .utf8)
+                    //                    print(dataString!)
+                    
+                    self.parseJSON(coinData: safeData)
                 }
-                
             }
             
             //start the task
             task.resume()
+        }
+    }
+    
+    func parseJSON(coinData: Data) {
+        let decoder = JSONDecoder()
+        do {
+            let decodeData = try decoder.decode(CoinData.self, from: coinData)
+            print(decodeData.assetIDQuote)
+            print(decodeData.rate)
+        } catch {
+            print(error)
         }
     }
 }
