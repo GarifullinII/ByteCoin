@@ -7,7 +7,13 @@
 
 import Foundation
 
+protocol CoinManagerDelegate {
+    func getRate(rate: Double)
+}
+
 struct CoinManager {
+    
+    var delegate: CoinManagerDelegate?
     
     let baseURL = "https://rest.coinapi.io/v1/exchangerate/BTC"
     let apiKey = "..."
@@ -51,8 +57,9 @@ struct CoinManager {
         let decoder = JSONDecoder()
         do {
             let decodeData = try decoder.decode(CoinData.self, from: coinData)
-            print(decodeData.assetIDQuote)
-            print(decodeData.rate)
+            let rate = decodeData.rate
+            
+            delegate?.getRate(rate: rate)
         } catch {
             print(error)
         }

@@ -7,11 +7,11 @@
 
 import UIKit
 
-class ByteCoinViewController: UIViewController {
+class ByteCoinViewController: UIViewController, CoinManagerDelegate {
     
     //MARK: - let/var
     
-    let coinManager = CoinManager()
+    var coinManager = CoinManager()
     
     var byteCoinStackView = UIStackView()
     
@@ -79,6 +79,8 @@ class ByteCoinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        coinManager.delegate = self
+        
         setupViews()
         setConstraints()
         
@@ -90,10 +92,13 @@ class ByteCoinViewController: UIViewController {
     
     //MARK: - flow funcs
     
-    
     //MARK: - public
     
-    
+    func getRate(rate: Double) {
+        DispatchQueue.main.async {
+            self.valueLabel.text = String(format: "%.1f", rate)
+        }
+    }
 }
 
 //MARK: - extensions UIPickerViewDataSource
@@ -146,7 +151,7 @@ extension ByteCoinViewController {
             ],
             axis: .horizontal,
             spacing: 2,
-            distribution: .fillProportionally
+            distribution: .fillEqually
         )
         coinView.addSubview(coinStackView)
         
@@ -170,7 +175,7 @@ extension ByteCoinViewController {
         ])
         
         NSLayoutConstraint.activate([
-            valueLabel.widthAnchor.constraint(equalToConstant: 210)
+            valueLabel.widthAnchor.constraint(equalToConstant: 150)
         ])
         
         NSLayoutConstraint.activate([
