@@ -99,6 +99,12 @@ class ByteCoinViewController: UIViewController, CoinManagerDelegate {
             self.valueLabel.text = String(format: "%.1f", rate)
         }
     }
+    
+    func getCurrency(currency: String) {
+        DispatchQueue.main.async {
+            self.currencyLabel.text = currency
+        }
+    }
 }
 
 //MARK: - extensions UIPickerViewDataSource
@@ -151,9 +157,9 @@ extension ByteCoinViewController {
             ],
             axis: .horizontal,
             spacing: 2,
-            distribution: .fillEqually
-        )
+            distribution: .fill        )
         coinView.addSubview(coinStackView)
+        coinView.addSubview(byteCoinImageView)
         
         view.addSubview(currencyPickerView)
     }
@@ -175,7 +181,8 @@ extension ByteCoinViewController {
         ])
         
         NSLayoutConstraint.activate([
-            valueLabel.widthAnchor.constraint(equalToConstant: 150)
+            byteCoinImageView.widthAnchor.constraint(equalToConstant: 80),
+            byteCoinImageView.heightAnchor.constraint(equalToConstant: 80)
         ])
         
         NSLayoutConstraint.activate([

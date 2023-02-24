@@ -9,6 +9,7 @@ import Foundation
 
 protocol CoinManagerDelegate {
     func getRate(rate: Double)
+    func getCurrency(currency: String)
 }
 
 struct CoinManager {
@@ -58,8 +59,10 @@ struct CoinManager {
         do {
             let decodeData = try decoder.decode(CoinData.self, from: coinData)
             let rate = decodeData.rate
+            let currency = decodeData.assetIDQuote
             
             delegate?.getRate(rate: rate)
+            delegate?.getCurrency(currency: currency)
         } catch {
             print(error)
         }
