@@ -94,19 +94,19 @@ class ByteCoinViewController: UIViewController, CoinManagerDelegate {
     
     //MARK: - public
     
-    func getRate(rate: Double) {
+    func getRate(_ rate: Double) {
         DispatchQueue.main.async {
             self.valueLabel.text = String(format: "%.1f", rate)
         }
     }
     
-    func getCurrency(currency: String) {
+    func getCurrency(_ currency: String) {
         DispatchQueue.main.async {
             self.currencyLabel.text = currency
         }
     }
     
-    func didFailWithError(error: Error) {
+    func didFailWithError(_ error: Error) {
         print(error)
     }
 }

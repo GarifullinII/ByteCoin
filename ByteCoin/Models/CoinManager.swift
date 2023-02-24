@@ -8,9 +8,9 @@
 import Foundation
 
 protocol CoinManagerDelegate {
-    func getRate(rate: Double)
-    func getCurrency(currency: String)
-    func didFailWithError(error: Error)
+    func getRate(_ rate: Double)
+    func getCurrency(_ currency: String)
+    func didFailWithError(_ error: Error)
 }
 
 struct CoinManager {
@@ -38,7 +38,7 @@ struct CoinManager {
             let task = session.dataTask(with: url) { data, response, error in
                 
                 if error != nil {
-                    delegate?.didFailWithError(error: error!)
+                    delegate?.didFailWithError(error!)
                     return
                 }
                 
@@ -62,10 +62,10 @@ struct CoinManager {
             let rate = decodeData.rate
             let currency = decodeData.assetIDQuote
             
-            delegate?.getRate(rate: rate)
-            delegate?.getCurrency(currency: currency)
+            delegate?.getRate(rate)
+            delegate?.getCurrency(currency)
         } catch {
-            delegate?.didFailWithError(error: error)
+            delegate?.didFailWithError(error)
         }
     }
 }
