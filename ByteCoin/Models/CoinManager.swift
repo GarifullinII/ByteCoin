@@ -10,6 +10,7 @@ import Foundation
 protocol CoinManagerDelegate {
     func getRate(rate: Double)
     func getCurrency(currency: String)
+    func didFailWithError(error: Error)
 }
 
 struct CoinManager {
@@ -37,7 +38,7 @@ struct CoinManager {
             let task = session.dataTask(with: url) { data, response, error in
                 
                 if error != nil {
-                    print(error!)
+                    delegate?.didFailWithError(error: error!)
                     return
                 }
                 
@@ -64,7 +65,7 @@ struct CoinManager {
             delegate?.getRate(rate: rate)
             delegate?.getCurrency(currency: currency)
         } catch {
-            print(error)
+            delegate?.didFailWithError(error: error)
         }
     }
 }

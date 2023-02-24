@@ -105,6 +105,10 @@ class ByteCoinViewController: UIViewController, CoinManagerDelegate {
             self.currencyLabel.text = currency
         }
     }
+    
+    func didFailWithError(error: Error) {
+        print(error)
+    }
 }
 
 //MARK: - extensions UIPickerViewDataSource
